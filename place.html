@@ -167,6 +167,9 @@ body:not(.waiting) .wait{opacity:0;visibility:hidden}
 .ot.r{right:calc(var(--ow2)*-.03);transform:translate(120%,-50%)}
 .ot.l{left:calc(var(--ow2)*-.03);transform:translate(-120%,-50%);--td:.25s}
 .ot.on{transform:translate(0,-50%)}
+.ot.sing.on img{animation:sg .34s ease-in-out infinite alternate;transform-origin:50% 100%;will-change:transform}
+.ot.r.sing.on img{transform-origin:100% 50%}.ot.l.sing.on img{transform-origin:0 50%}
+@keyframes sg{0%{transform:translate(0,0) rotate(-1.4deg) scale(1)}50%{transform:translate(1px,-3px) rotate(.4deg) scale(1.012)}100%{transform:translate(-1px,1px) rotate(1.6deg) scale(.995)}}
 .ot.sing.on{pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ot.mad.r{right:calc(var(--ow2)*-.09)}.ot.mad.l{left:calc(var(--ow2)*-.09)}
 .ot.mad{--td:.28s;filter:drop-shadow(0 0 16px rgba(160,20,20,.55))}
@@ -320,7 +323,15 @@ body:not(.waiting) .wait{opacity:0;visibility:hidden}
     btn.addEventListener('click',function(){
       setTimeout(function(){if(angry){angry=false;clr();off();sing(400)}},0);
     });
-    window.__startOtters=function(d){if(!angry)sing(d)};
+    /* первая выдра появляется, когда в песне 0:35 (если звук не идёт — через 9 сек после нажатия) */
+    window.__startOtters=function(){
+      if(angry) return;
+      var t0=Date.now(),poll=setInterval(function(){
+        var t=window.olyaMusic&&olyaMusic.time?olyaMusic.time():-1;
+        if(angry){clearInterval(poll);return}
+        if((t>=35)||(Date.now()-t0>9000)){clearInterval(poll);if(!angry)sing(0)}
+      },150);
+    };
   })();
 
   /* карта: Leaflet (жесты, + / −), при сбое загрузки — виджет Яндекса */

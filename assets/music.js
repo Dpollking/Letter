@@ -117,7 +117,7 @@
     if(mode==='yt'){if(ytWant&&!ytPlaying){ytGo()}}
     else unlockSynth();
   }
-  window.olyaMusic={stop:function(){if(playing())stop()},start:function(){if(!playing()){btn.classList.add('touched');start()}unlock()}};
+  window.olyaMusic={time:function(){return(mode==='yt'&&ytPlaying)?au.currentTime:-1},stop:function(){if(playing())stop()},start:function(){if(!playing()){btn.classList.add('touched');start()}unlock()}};
   btn.addEventListener('click',function(e){
     e.stopPropagation();btn.classList.add('touched');
     if(playing()&&mode==='yt'&&!ytPlaying){unlock();return}
