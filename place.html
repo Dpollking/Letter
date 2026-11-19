@@ -323,10 +323,10 @@ body:not(.waiting) .wait{opacity:0;visibility:hidden}
     btn.addEventListener('click',function(){
       setTimeout(function(){if(angry){angry=false;clr();off();sing(400)}},0);
     });
-    /* первая выдра появляется через 13 секунд после нажатия на конверт (песня к этому времени на 0:40) */
+    /* первая выдра появляется через 16 секунд после нажатия на конверт (песня к этому времени на 0:43) */
     window.__startOtters=function(){
       if(angry) return;
-      tm(function(){if(!angry)sing(0)},13000);
+      tm(function(){if(!angry)sing(0)},16000);
     };
   })();
 
