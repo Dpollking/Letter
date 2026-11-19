@@ -323,13 +323,13 @@ body:not(.waiting) .wait{opacity:0;visibility:hidden}
     btn.addEventListener('click',function(){
       setTimeout(function(){if(angry){angry=false;clr();off();sing(400)}},0);
     });
-    /* первая выдра появляется, когда в песне 0:37 (если звук не идёт — через 9 сек после нажатия) */
+    /* первая выдра появляется, когда в песне 0:40 (если звук не идёт — через 9 сек после нажатия) */
     window.__startOtters=function(){
       if(angry) return;
       var t0=Date.now(),poll=setInterval(function(){
         var t=window.olyaMusic&&olyaMusic.time?olyaMusic.time():-1;
         if(angry){clearInterval(poll);return}
-        if((t>=37)||(Date.now()-t0>9000)){clearInterval(poll);if(!angry)sing(0)}
+        if((t>=40)||(Date.now()-t0>14000)){clearInterval(poll);if(!angry)sing(0)}
       },150);
     };
   })();
