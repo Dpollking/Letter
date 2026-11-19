@@ -117,7 +117,15 @@
     if(mode==='yt'){if(ytWant&&!ytPlaying){ytGo()}}
     else unlockSynth();
   }
-  window.olyaMusic={time:function(){return(mode==='yt'&&ytPlaying)?au.currentTime:-1},stop:function(){if(playing())stop()},start:function(){if(!playing()){btn.classList.add('touched');start()}unlock()}};
+  window.olyaMusic={begin:function(){
+    /* нажатие на конверт: песня всегда с 0:27, даже если уже играла */
+    btn.classList.add('touched');
+    if(mode==='synth'||ytFail){if(!playing())start();return}
+    ytWant=true;mode='yt';ui(true);began=true;
+    function seek(){try{au.currentTime=START}catch(e){}}
+    if(au.readyState>=1)seek();else au.addEventListener('loadedmetadata',seek,{once:true});
+    try{var p=au.play();if(p&&p.catch)p.catch(function(){})}catch(e){}
+  },time:function(){return(mode==='yt'&&ytPlaying)?au.currentTime:-1},stop:function(){if(playing())stop()},start:function(){if(!playing()){btn.classList.add('touched');start()}unlock()}};
   btn.addEventListener('click',function(e){
     e.stopPropagation();btn.classList.add('touched');
     if(playing()&&mode==='yt'&&!ytPlaying){unlock();return}
