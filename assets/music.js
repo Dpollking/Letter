@@ -79,7 +79,7 @@
   /* ---- песня: файл assets/song.mp3, старт с 0:27 и по кругу; при сбое — своя мелодия ---- */
   var START=27,au=new Audio(),ytFail=false,ytWant=false,ytPlaying=false,mode='yt',failT=0,began=false;
   au.preload='auto';au.src='assets/song.mp3';
-  window.__songReady=new Promise(function(res){au.addEventListener('canplaythrough',res,{once:true});au.addEventListener('error',res,{once:true});setTimeout(res,12000)});
+  window.__songReady=new Promise(function(res){au.addEventListener('canplay',res,{once:true});au.addEventListener('error',res,{once:true});setTimeout(res,5000)});
   au.addEventListener('playing',function(){ytPlaying=true;clearTimeout(failT);if(ytWant) ui(true)});
   au.addEventListener('pause',function(){ytPlaying=false;if(mode==='yt') ui(false)});
   au.addEventListener('ended',function(){try{au.currentTime=START;au.play()}catch(e){}});
