@@ -347,12 +347,18 @@ body:not(.waiting) .wait{opacity:0;visibility:hidden}
       tm(function(){shh.classList.remove('on')},6000);
     }
     [oL,oR,oB].forEach(function(e){e.addEventListener('click',mad)});
+    var wasOn=false;
+    btn.addEventListener('click',function(){wasOn=btn.classList.contains('on')},true);
     btn.addEventListener('click',function(){
-      setTimeout(function(){if(angry){angry=false;clr();off();sing(400)}},0);
+      var w=wasOn;
+      setTimeout(function(){
+        if(w){mad();return}                                   /* выключаем музыку сердечком → злые выдры */
+        if(angry){angry=false;clr();off();sing(400)}          /* включаем снова → поют */
+      },0);
     });
     /* первая выдра появляется в момент появления карты (9,5 сек после нажатия) */
     window.__startOtters=function(){
-      if(angry) return;
+      angry=false;clr();off();
       tm(function(){if(!angry)sing(0)},9500);
     };
   })();
