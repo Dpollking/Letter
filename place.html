@@ -329,12 +329,12 @@ body:not(.waiting) .wait{opacity:0;visibility:hidden}
     function sing(delay){
       clr();
       tm(function(){oL.classList.add('on')},delay);
-      tm(function(){oL.classList.remove('on')},delay+5300);
-      tm(function(){oR.classList.add('on')},delay+6000);
-      tm(function(){oR.classList.remove('on')},delay+11300);
-      tm(function(){oB.classList.add('on')},delay+12000);
-      tm(function(){oB.classList.remove('on')},delay+17300);
-      tm(function(){sing(0)},delay+18500);
+      tm(function(){oL.classList.remove('on')},delay+3300);
+      tm(function(){oR.classList.add('on')},delay+4000);
+      tm(function(){oR.classList.remove('on')},delay+7300);
+      tm(function(){oB.classList.add('on')},delay+8000);
+      tm(function(){oB.classList.remove('on')},delay+11300);
+      tm(function(){sing(0)},delay+12500);
     }
     function mad(){
       if(angry) return;angry=true;clr();off();
